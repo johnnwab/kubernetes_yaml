@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: ose-rs
+  namespace: dev
+spec:
+  selector: 
+    matchLabels:
+      app: acada-app
+  template: 
+    metadata:
+      name: ose-pod
+      labels:
+        app: acada-app
+    spec: 
+      containers:
+      - name: ose-c
+        image: acadalearning/acada:2.5
+        ports:
+        - containerPort: 8080
+---
+
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: ose-svc
+  namespace: dev
+spec: 
+  type: ExternalName
+  externalName: db.acadalearning.com
+  selector: 
+    app: acada-app
+  ports: 
+  - targetPort: 8080
+    port: 80
+    protocol: TCP
