@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: webapp
+  namespace: dev
+spec: 
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name: webapp
+      labels: 
+        app: webapp
+    spec: 
+      containers:
+      - name: webapp
+        image: acadalearning/spring-boot-mongo
+        ports: 
+        - containerPort: 8080
