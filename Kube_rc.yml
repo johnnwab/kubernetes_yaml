@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: peace-rc
+  namespace: dev
+spec: 
+  selector:
+    app: webapp
+  template: 
+    metadata:
+      name: peace-pod
+      labels: 
+        app: webapp
+    spec: 
+      containers:
+      - name: peace-c
+        image: acadalearning/acada:2.5
+        ports:
+        - containerPort: 8080
